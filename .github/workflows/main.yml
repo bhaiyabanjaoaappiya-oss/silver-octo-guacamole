@@ -1,0 +1,30 @@
+name: Run Python Bot
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:  # allows manual trigger
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout your repo
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2. Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'   # or your bot’s version
+
+      # 3. Install dependencies
+      - name: Install requirements
+        run: pip install -r requirements.txt
+
+      # 4. Run your bot
+      - name: Run bot
+        run: python bot.py
